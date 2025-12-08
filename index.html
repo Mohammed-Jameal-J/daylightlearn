@@ -1,950 +1,1055 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaylightLearn - Entertainment Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #CFCFCF;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header/Navigation */
-        header {
-            background: #000000;
-            padding: 20px 0;
-            border-bottom: 1px solid #2a2a2a;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Sora', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: #A3FF12;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            font-size: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #CFCFCF;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #A3FF12;
-        }
-
-        .nav-links a i {
-            margin-left: 5px;
-            font-size: 12px;
-        }
-
-        .login-btn {
-            padding: 12px 28px;
-            background: transparent;
-            color: #A3FF12;
-            border: 2px solid #A3FF12;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .login-btn:hover {
-            background: #A3FF12;
-            color: #000000;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: #000000;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            gap: 20px;
-            opacity: 0.45;
-            filter: blur(10px);
-        }
-
-        .hero-bg-image {
-            flex: 1;
-            background: linear-gradient(135deg, #A3FF12 0%, #1a1a1a 100%);
-            height: 100%;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 76px;
-            color: #FFFFFF;
-            margin-bottom: 24px;
-        }
-
-        .hero p {
-            font-size: 16px;
-            line-height: 27px;
-            color: #CFCFCF;
-            margin-bottom: 40px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 16px 32px;
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: #A3FF12;
-            color: #000000;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(163, 255, 18, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #A3FF12;
-            border: 2px solid #A3FF12;
-        }
-
-        .btn-outline:hover {
-            background: #A3FF12;
-            color: #000000;
-            transform: scale(1.02);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 100px 0;
-        }
-
-        .section-dark {
-            background: #0B0B0B;
-        }
-
-        .section-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 36px;
-            font-weight: 600;
-            line-height: 47px;
-            color: #FFFFFF;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .slider-container {
-            position: relative;
-            overflow: hidden;
-            padding: 0 60px;
-        }
-
-        .cards-slider {
-            display: flex;
-            gap: 32px;
-            transition: transform 0.5s ease;
-        }
-
-        .card {
-            background: #111111;
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .cards-grid .card {
-            min-width: auto;
-        }
-
-        .cards-slider .card {
-            min-width: calc(33.333% - 22px);
-            flex-shrink: 0;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #A3FF12 0%, #1a1a1a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #A3FF12;
-            color: #000000;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .slider-btn:hover {
-            background: #FFFFFF;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .slider-btn.prev {
-            left: 0;
-        }
-
-        .slider-btn.next {
-            right: 0;
-        }
-
-        .card-content {
-            padding: 24px;
-        }
-
-        .card-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 30px;
-            color: #A3FF12;
-            margin-bottom: 8px;
-        }
-
-        .card-subtitle {
-            font-size: 14px;
-            line-height: 22px;
-            color: #CFCFCF;
-        }
-
-        /* What We Do Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .service-card {
-            background: #111111;
-            border-radius: 16px;
-            padding: 40px 32px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .service-card:hover {
-            border-color: #A3FF12;
-            transform: translateY(-5px);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 24px;
-            border: 3px solid #A3FF12;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-
-        .service-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 30px;
-            color: #FFFFFF;
-            margin-bottom: 12px;
-        }
-
-        .service-description {
-            font-size: 16px;
-            line-height: 27px;
-            color: #CFCFCF;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .testimonial-card {
-            background: #111111;
-            border-radius: 16px;
-            padding: 32px;
-            text-align: center;
-        }
-
-        .testimonial-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #A3FF12 0%, #1a1a1a 100%);
-            margin: 0 auto 20px;
-        }
-
-        .testimonial-quote {
-            font-size: 16px;
-            line-height: 27px;
-            color: #CFCFCF;
-            margin-bottom: 16px;
-            font-style: italic;
-        }
-
-        .testimonial-name {
-            font-family: 'Sora', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            color: #A3FF12;
-        }
-
-        /* FAQ Section */
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: #0F0F0F;
-            border: 2px solid #2a2a2a;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item.active {
-            background: #111111;
-            border-color: #A3FF12;
-        }
-
-        .faq-question {
-            padding: 24px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Sora', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: #FFFFFF;
-        }
-
-        .faq-question:hover {
-            color: #A3FF12;
-        }
-
-        .faq-toggle {
-            font-size: 24px;
-            color: #A3FF12;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 24px;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 24px 24px;
-        }
-
-        .faq-answer p {
-            font-size: 16px;
-            line-height: 27px;
-            color: #CFCFCF;
-        }
-
-        /* Footer */
-        footer {
-            background: #000000;
-            padding: 60px 0 30px;
-            border-top: 2px solid #A3FF12;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            font-family: 'Sora', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: #FFFFFF;
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: #CFCFCF;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #A3FF12;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 16px;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #A3FF12;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #A3FF12;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background: #A3FF12;
-            color: #000000;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #2a2a2a;
-            font-size: 14px;
-            color: #CFCFCF;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-                line-height: 50px;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DaylightLearn - Entertainment Website</title>
+        <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
 
-            .cards-grid,
-            .services-grid,
-            .testimonials-grid,
-            .footer-content {
-                grid-template-columns: 1fr;
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #000000;
+                color: #CFCFCF;
+                overflow-x: hidden;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* Header/Navigation */
+            header {
+                background: #000000;
+                padding: 20px 0;
+                border-bottom: 1px solid #2a2a2a;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-family: 'Sora', sans-serif;
+                font-size: 28px;
+                font-weight: 700;
+                color: #A3FF12;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .logo i {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 40px;
+                align-items: center;
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: #CFCFCF;
+                text-decoration: none;
+                font-size: 16px;
+                transition: color 0.3s ease;
+                position: relative;
+            }
+
+            .nav-links a:hover {
+                color: #A3FF12;
+            }
+
+            .nav-links a i {
+                margin-left: 5px;
+                font-size: 12px;
+            }
+
+            .login-btn {
+                padding: 12px 28px;
+                background: transparent;
+                color: #A3FF12;
+                border: 2px solid #A3FF12;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .login-btn:hover {
+                background: #A3FF12;
+                color: #000000;
+            }
+
+            /* Hero Section */
+            .hero {
+                background: #000000;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                gap: 20px;
+                opacity: 0.45;
+                filter: blur(10px);
+            }
+
+            .hero-bg-image {
+                flex: 1;
+                background: linear-gradient(135deg, #A3FF12 0%, #1a1a1a 100%);
+                height: 100%;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+                text-align: center;
+                max-width: 800px;
+            }
+
+            .hero h1 {
+                font-family: 'Sora', sans-serif;
+                font-size: 64px;
+                font-weight: 700;
+                line-height: 76px;
+                color: #FFFFFF;
+                margin-bottom: 24px;
+            }
+
+            .hero p {
+                font-size: 16px;
+                line-height: 27px;
+                color: #CFCFCF;
+                margin-bottom: 40px;
             }
 
             .hero-buttons {
-                flex-direction: column;
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+            }
+
+            .btn {
+                padding: 16px 32px;
+                border-radius: 6px;
+                font-family: 'Inter', sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                border: none;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary {
+                background: #A3FF12;
+                color: #000000;
+            }
+
+            .btn-primary:hover {
+                transform: scale(1.02);
+                box-shadow: 0 0 20px rgba(163, 255, 18, 0.4);
+            }
+
+            .btn-outline {
+                background: transparent;
+                color: #A3FF12;
+                border: 2px solid #A3FF12;
+            }
+
+            .btn-outline:hover {
+                background: #A3FF12;
+                color: #000000;
+                transform: scale(1.02);
+            }
+
+            /* Section Styles */
+            section {
+                padding: 100px 0;
+            }
+
+            .section-dark {
+                background: #0B0B0B;
             }
 
             .section-title {
+                font-family: 'Sora', sans-serif;
+                font-size: 36px;
+                font-weight: 600;
+                line-height: 47px;
+                color: #FFFFFF;
+                text-align: center;
+                margin-bottom: 60px;
+            }
+
+            /* Cards Grid */
+            .cards-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+
+            .slider-container {
+                position: relative;
+                overflow: hidden;
+                padding: 0 60px;
+            }
+
+            .cards-slider {
+                display: flex;
+                gap: 32px;
+                transition: transform 0.5s ease;
+            }
+
+            .card {
+                background: #111111;
+                border-radius: 16px;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+                cursor: pointer;
+            }
+
+            .cards-grid .card {
+                min-width: auto;
+            }
+
+            .cards-slider .card {
+                min-width: calc(33.333% - 22px);
+                flex-shrink: 0;
+            }
+
+            .card:hover {
+                transform: scale(1.02);
+            }
+
+            .card-image {
+                width: 100%;
+                height: 300px;
+                background: linear-gradient(135deg, #A3FF12 0%, #1a1a1a 100%);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .card-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .slider-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #A3FF12;
+                color: #000000;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 20px;
+                z-index: 10;
+                transition: all 0.3s ease;
+            }
+
+            .slider-btn:hover {
+                background: #FFFFFF;
+                transform: translateY(-50%) scale(1.1);
+            }
+
+            .slider-btn.prev {
+                left: 0;
+            }
+
+            .slider-btn.next {
+                right: 0;
+            }
+
+            .card-content {
+                padding: 24px;
+            }
+
+            .card-title {
+                font-family: 'Sora', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 30px;
+                color: #A3FF12;
+                margin-bottom: 8px;
+            }
+
+            .card-subtitle {
+                font-size: 14px;
+                line-height: 22px;
+                color: #CFCFCF;
+            }
+
+            /* What We Do Section */
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+
+            .service-card {
+                background: #111111;
+                border-radius: 16px;
+                padding: 40px 32px;
+                text-align: center;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            .service-card:hover {
+                border-color: #A3FF12;
+                transform: translateY(-5px);
+            }
+
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                margin: 0 auto 24px;
+                border: 3px solid #A3FF12;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 font-size: 28px;
             }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                DaylightLearn
-            </div>
-            <ul class="nav-links">
-                <li><a href="#masterclasses">Masterclasses <i class="fas fa-chevron-down"></i></a></li>
-                <li><a href="#workshops">Live Workshops <i class="fas fa-chevron-down"></i></a></li>
-                <li><a href="#mentorship">Mentorship Programs <i class="fas fa-chevron-down"></i></a></li>
-                <li><a href="#forge">The Forge</a></li>
-            </ul>
-            <button class="login-btn">LOGIN/SIGNUP</button>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg">
-            <div class="hero-bg-image"></div>
-            <div class="hero-bg-image"></div>
-            <div class="hero-bg-image"></div>
-        </div>
-        <div class="hero-content">
-            <h1>Discover Amazing Entertainment Experiences</h1>
-            <p>Learn from world-class artists, singers, and chefs. Start your creative journey today with our comprehensive courses and masterclasses.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">Start Learning</button>
-                <button class="btn btn-outline">Browse Artists</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Singers Section -->
-    <section class="section-dark">
-        <div class="container">
-            <h2 class="section-title">Featured Singers</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/K._S._Chithra_at_Filmfare_Awards_South.jpg/800px-K._S._Chithra_at_Filmfare_Awards_South.jpg" alt="K S Chithra">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">K. S. Chithra</h3>
-                        <p class="card-subtitle">Legendary Singer • Classical Master</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://instagram.fmaa1-5.fna.fbcdn.net/v/t51.2885-19/356367196_985379429318106_7029330367739181120_n.jpg" alt="Anuradha">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Anuradha</h3>
-                        <p class="card-subtitle">Versatile Vocalist • Playback Artist</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mano_%28singer%29.jpg/800px-Mano_%28singer%29.jpg" alt="Mano">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Mano</h3>
-                        <p class="card-subtitle">Master Performer • Melodious Voice</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Chefs Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">Master Chefs</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Gordon_Ramsay.jpg/800px-Gordon_Ramsay.jpg" alt="Gordon Ramsay">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Gordon Ramsay</h3>
-                        <p class="card-subtitle">Michelin Star Chef • Culinary Master</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Sanjeev_Kapoor.jpg/800px-Sanjeev_Kapoor.jpg" alt="Sanjeev Kapoor">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Sanjeev Kapoor</h3>
-                        <p class="card-subtitle">Celebrity Chef • Indian Cuisine</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vikas_Khanna_2013.jpg/800px-Vikas_Khanna_2013.jpg" alt="Vikas Khanna">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Vikas Khanna</h3>
-                        <p class="card-subtitle">Award Winner • Innovative Chef</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Top Artists Slider Section -->
-    <section class="section-dark">
-        <div class="container">
-            <h2 class="section-title">Top Artists & Experts</h2>
-            <div class="slider-container">
-                <button class="slider-btn prev" onclick="slideCards('artists', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="cards-slider" id="artists-slider">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Arijit_Singh_snapped_at_a_recording_studio_%28cropped%29.jpg/800px-Arijit_Singh_snapped_at_a_recording_studio_%28cropped%29.jpg" alt="Arijit Singh">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Arijit Singh</h3>
-                            <p class="card-subtitle">Super Singer • Bollywood Playback</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Shreya_Ghoshal_at_Filmfare_Awards_South.jpg/800px-Shreya_Ghoshal_at_Filmfare_Awards_South.jpg" alt="Shreya Ghoshal">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Shreya Ghoshal</h3>
-                            <p class="card-subtitle">Vocal Legend • Classical Fusion</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sonu_Nigam_graces_Bhamla_Foundation%27s_Health_Awareness_Campaign_%28cropped%29.jpg/800px-Sonu_Nigam_graces_Bhamla_Foundation%27s_Health_Awareness_Campaign_%28cropped%29.jpg" alt="Sonu Nigam">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Sonu Nigam</h3>
-                            <p class="card-subtitle">Master Performer • Versatile Artist</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Jamie_Oliver_%282018%29.jpg/800px-Jamie_Oliver_%282018%29.jpg" alt="Jamie Oliver">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Jamie Oliver</h3>
-                            <p class="card-subtitle">TV Chef • Healthy Cooking Advocate</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Madhur_Jaffrey.jpg/800px-Madhur_Jaffrey.jpg" alt="Madhur Jaffrey">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Madhur Jaffrey</h3>
-                            <p class="card-subtitle">Author • Indian Cuisine Expert</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ranveer_Brar.jpg/800px-Ranveer_Brar.jpg" alt="Ranveer Brar">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Ranveer Brar</h3>
-                            <p class="card-subtitle">Modern Indian • Television Host</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="slider-btn next" onclick="slideCards('artists', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- What We Do Section -->
-    <section class="section-dark">
-        <div class="container">
-            <h2 class="section-title">What We Do</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎵</div>
-                    <h3 class="service-title">Music Lessons</h3>
-                    <p class="service-description">Learn from professional singers and musicians with personalized courses</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🍳</div>
-                    <h3 class="service-title">Cooking Classes</h3>
-                    <p class="service-description">Master culinary arts with step-by-step guidance from expert chefs</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎬</div>
-                    <h3 class="service-title">Video Tutorials</h3>
-                    <p class="service-description">High-quality video content with detailed explanations and demonstrations</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📚</div>
-                    <h3 class="service-title">Course Materials</h3>
-                    <p class="service-description">Comprehensive study materials and resources for every course</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏆</div>
-                    <h3 class="service-title">Certifications</h3>
-                    <p class="service-description">Earn recognized certificates upon course completion</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💬</div>
-                    <h3 class="service-title">Live Sessions</h3>
-                    <p class="service-description">Interactive live classes with Q&A and personalized feedback</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">What Our Students Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-image"></div>
-                    <p class="testimonial-quote">"The singing courses transformed my voice. The instructors are incredibly talented and supportive!"</p>
-                    <p class="testimonial-name">Priya Sharma</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-image"></div>
-                    <p class="testimonial-quote">"Learning cooking from master chefs has been a dream come true. Highly recommend!"</p>
-                    <p class="testimonial-name">Rajesh Kumar</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-image"></div>
-                    <p class="testimonial-quote">"Best investment in my creative journey. The quality of content is outstanding!"</p>
-                    <p class="testimonial-name">Ananya Iyer</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="section-dark">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How do I enroll in a course?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Simply browse our course catalog, select your desired course, and click the "Enroll Now" button. You'll be guided through a simple registration process.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Are the courses suitable for beginners?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! We offer courses for all skill levels, from complete beginners to advanced practitioners. Each course clearly indicates its difficulty level.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do I get a certificate after completion?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolutely! Upon successfully completing a course, you'll receive a digital certificate that you can share on social media and add to your portfolio.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I access courses on mobile devices?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! Our platform is fully responsive and works seamlessly on all devices including smartphones, tablets, and desktops.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What is your refund policy?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We offer a 30-day money-back guarantee. If you're not satisfied with your course, contact our support team for a full refund.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About Us</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Courses</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Music</a></li>
-                        <li><a href="#">Cooking</a></li>
-                        <li><a href="#">Dance</a></li>
-                        <li><a href="#">Art</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">f</a>
-                        <a href="#" class="social-icon">t</a>
-                        <a href="#" class="social-icon">i</a>
-                        <a href="#" class="social-icon">y</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Entertainment Website. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Slider functionality
-        let sliderPositions = {
-            'artists': 0
-        };
-
-        function slideCards(type, direction) {
-            const slider = document.getElementById(`${type}-slider`);
-            const cards = slider.children;
-            const cardWidth = cards[0].offsetWidth + 32; // card width + gap
-            const maxPosition = -(cards.length - 3) * cardWidth; // show 3 cards at a time
-            
-            sliderPositions[type] += direction * cardWidth;
-            
-            // Boundary checks
-            if (sliderPositions[type] > 0) {
-                sliderPositions[type] = 0;
-            } else if (sliderPositions[type] < maxPosition) {
-                sliderPositions[type] = maxPosition;
+            .service-title {
+                font-family: 'Sora', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 30px;
+                color: #FFFFFF;
+                margin-bottom: 12px;
             }
-            
-            slider.style.transform = `translateX(${sliderPositions[type]}px)`;
+
+            .service-description {
+                font-size: 16px;
+                line-height: 27px;
+                color: #CFCFCF;
+            }
+
+            /* Testimonials */
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+
+            .testimonial-card {
+                background: #111111;
+                border-radius: 16px;
+                padding: 32px;
+                text-align: center;
+            }
+
+            .testimonial-image {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #A3FF12 0%, #1a1a1a 100%);
+                margin: 0 auto 20px;
+            }
+
+            .testimonial-quote {
+                font-size: 16px;
+                line-height: 27px;
+                color: #CFCFCF;
+                margin-bottom: 16px;
+                font-style: italic;
+            }
+
+            .testimonial-name {
+                font-family: 'Sora', sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                color: #A3FF12;
+            }
+
+            /* FAQ Section */
+            .faq-list {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .faq-item {
+                background: #0F0F0F;
+                border: 2px solid #2a2a2a;
+                border-radius: 12px;
+                margin-bottom: 16px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .faq-item.active {
+                background: #111111;
+                border-color: #A3FF12;
+            }
+
+            .faq-question {
+                padding: 24px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-family: 'Sora', sans-serif;
+                font-size: 18px;
+                font-weight: 600;
+                color: #FFFFFF;
+            }
+
+            .faq-question:hover {
+                color: #A3FF12;
+            }
+
+            .faq-toggle {
+                font-size: 24px;
+                color: #A3FF12;
+                transition: transform 0.3s ease;
+            }
+
+            .faq-item.active .faq-toggle {
+                transform: rotate(45deg);
+            }
+
+            .faq-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0 24px;
+            }
+
+            .faq-item.active .faq-answer {
+                max-height: 500px;
+                padding: 0 24px 24px;
+            }
+
+            .faq-answer p {
+                font-size: 16px;
+                line-height: 27px;
+                color: #CFCFCF;
+            }
+
+            /* Footer */
+            footer {
+                background: #000000;
+                padding: 60px 0 30px;
+                border-top: 2px solid #A3FF12;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            .footer-section h3 {
+                font-family: 'Sora', sans-serif;
+                font-size: 18px;
+                font-weight: 600;
+                color: #FFFFFF;
+                margin-bottom: 20px;
+            }
+
+            .footer-links {
+                list-style: none;
+            }
+
+            .footer-links li {
+                margin-bottom: 12px;
+            }
+
+            .footer-links a {
+                color: #CFCFCF;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                color: #A3FF12;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 16px;
+            }
+
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid #A3FF12;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #A3FF12;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .social-icon:hover {
+                background: #A3FF12;
+                color: #000000;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                padding-top: 30px;
+                border-top: 1px solid #2a2a2a;
+                font-size: 14px;
+                color: #CFCFCF;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .hero h1 {
+                    font-size: 40px;
+                    line-height: 50px;
+                }
+
+                .cards-grid,
+                .services-grid,
+                .testimonials-grid,
+                .footer-content {
+                    grid-template-columns: 1fr;
+                }
+
+                .hero-buttons {
+                    flex-direction: column;
+                }
+
+                .section-title {
+                    font-size: 28px;
+                }
+            }
+            /* --- New CSS for Hamburger Menu --- */
+
+/* Hide the toggle button by default (for desktop view) */
+.nav-toggle {
+    display: none;
+    font-size: 24px;
+    color: #A3FF12;
+    cursor: pointer;
+}
+
+/* Modify nav-links for mobile */
+@media (max-width: 992px) { /* Use 992px to ensure nav-links wrap before 768px */
+    .nav-links {
+        /* Initially hide the navigation links for mobile */
+        display: none;
+        /* Make links stack vertically */
+        flex-direction: column;
+        /* Position them to cover the whole screen width below the header */
+        position: absolute;
+        top: 85px; /* Adjust based on header height */
+        left: 0;
+        width: 100%;
+        background: #000000;
+        border-top: 1px solid #2a2a2a;
+        padding: 20px 0;
+        gap: 0; /* Remove gap for stacked links */
+    }
+
+    /* Show the mobile menu when 'active' class is added by JS */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block; /* Make the link take full width for easier tapping */
+        padding: 15px 20px;
+        border-bottom: 1px solid #111111;
+    }
+
+    .login-btn {
+        margin-right: 20px; /* Add some spacing from the right edge */
+    }
+
+    /* Show the toggle button on small screens */
+    .nav-toggle {
+        display: block;
+        background: black;
+        border: 1px;
+    }
+
+    /* Hide the login button on very small screens to make room for toggle/logo */
+    .login-btn {
+        display: none;
+    }
+}
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <nav class="container">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        DaylightLearn
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#masterclasses">Masterclasses <i class="fas fa-chevron-down"></i></a></li>
+        <li><a href="#workshops">Live Workshops <i class="fas fa-chevron-down"></i></a></li>
+        <li><a href="#mentorship">Mentorship Programs <i class="fas fa-chevron-down"></i></a></li>
+        <li><a href="#forge">The Forge</a></li>
+    </ul>
+    <button class="login-btn">LOGIN/SIGNUP</button>
+</nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-bg-image"></div>
+                <div class="hero-bg-image"></div>
+                <div class="hero-bg-image"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Discover Amazing Entertainment Experiences</h1>
+                <p>Learn from world-class artists, singers, and chefs. Start your creative journey today with our comprehensive courses and masterclasses.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Start Learning</button>
+                    <button class="btn btn-outline">Browse Artists</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Singers Section -->
+        <section class="section-dark">
+            <div class="container">
+                <h2 class="section-title">Featured Singers</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="4.jpg">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">K. S. Chithra</h3>
+                            <p class="card-subtitle">Legendary Singer • Classical Master</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="3.jpg" alt="Anuradha">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Anuradha</h3>
+                            <p class="card-subtitle">Versatile Vocalist • Playback Artist</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="2.jpg" alt="Mano">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Mano</h3>
+                            <p class="card-subtitle">Master Performer • Melodious Voice</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Chefs Section -->
+        <section>
+            <div class="container">
+                <h2 class="section-title">Master Chefs</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="1.jpg" alt="Gordon Ramsay">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Damu</h3>
+                            <p class="card-subtitle">Michelin Star Chef • Culinary Master</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Sanjeev_Kapoor.jpg/800px-Sanjeev_Kapoor.jpg" alt="Sanjeev Kapoor">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Sanjeev Kapoor</h3>
+                            <p class="card-subtitle">Celebrity Chef • Indian Cuisine</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vikas_Khanna_2013.jpg/800px-Vikas_Khanna_2013.jpg" alt="Vikas Khanna">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Vikas Khanna</h3>
+                            <p class="card-subtitle">Award Winner • Innovative Chef</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Artists Slider Section -->
+        <section class="section-dark">
+            <div class="container">
+                <h2 class="section-title">Top Artists & Experts</h2>
+                <div class="slider-container">
+                    <button class="slider-btn prev" onclick="slideCards('artists', -1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="cards-slider" id="artists-slider">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Arijit_Singh_snapped_at_a_recording_studio_%28cropped%29.jpg/800px-Arijit_Singh_snapped_at_a_recording_studio_%28cropped%29.jpg" alt="Arijit Singh">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Arijit Singh</h3>
+                                <p class="card-subtitle">Super Singer • Bollywood Playback</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Shreya_Ghoshal_at_Filmfare_Awards_South.jpg/800px-Shreya_Ghoshal_at_Filmfare_Awards_South.jpg" alt="Shreya Ghoshal">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Shreya Ghoshal</h3>
+                                <p class="card-subtitle">Vocal Legend • Classical Fusion</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sonu_Nigam_graces_Bhamla_Foundation%27s_Health_Awareness_Campaign_%28cropped%29.jpg/800px-Sonu_Nigam_graces_Bhamla_Foundation%27s_Health_Awareness_Campaign_%28cropped%29.jpg" alt="Sonu Nigam">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Sonu Nigam</h3>
+                                <p class="card-subtitle">Master Performer • Versatile Artist</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Jamie_Oliver_%282018%29.jpg/800px-Jamie_Oliver_%282018%29.jpg" alt="Jamie Oliver">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Jamie Oliver</h3>
+                                <p class="card-subtitle">TV Chef • Healthy Cooking Advocate</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Madhur_Jaffrey.jpg/800px-Madhur_Jaffrey.jpg" alt="Madhur Jaffrey">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Madhur Jaffrey</h3>
+                                <p class="card-subtitle">Author • Indian Cuisine Expert</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ranveer_Brar.jpg/800px-Ranveer_Brar.jpg" alt="Ranveer Brar">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Ranveer Brar</h3>
+                                <p class="card-subtitle">Modern Indian • Television Host</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn next" onclick="slideCards('artists', 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Do Section -->
+        <section class="section-dark">
+            <div class="container">
+                <h2 class="section-title">What We Do</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🎵</div>
+                        <h3 class="service-title">Music Lessons</h3>
+                        <p class="service-description">Learn from professional singers and musicians with personalized courses</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🍳</div>
+                        <h3 class="service-title">Cooking Classes</h3>
+                        <p class="service-description">Master culinary arts with step-by-step guidance from expert chefs</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎬</div>
+                        <h3 class="service-title">Video Tutorials</h3>
+                        <p class="service-description">High-quality video content with detailed explanations and demonstrations</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h3 class="service-title">Course Materials</h3>
+                        <p class="service-description">Comprehensive study materials and resources for every course</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏆</div>
+                        <h3 class="service-title">Certifications</h3>
+                        <p class="service-description">Earn recognized certificates upon course completion</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💬</div>
+                        <h3 class="service-title">Live Sessions</h3>
+                        <p class="service-description">Interactive live classes with Q&A and personalized feedback</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section>
+            <div class="container">
+                <h2 class="section-title">What Our Students Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image"></div>
+                        <p class="testimonial-quote">"The singing courses transformed my voice. The instructors are incredibly talented and supportive!"</p>
+                        <p class="testimonial-name">Priya Sharma</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-image"></div>
+                        <p class="testimonial-quote">"Learning cooking from master chefs has been a dream come true. Highly recommend!"</p>
+                        <p class="testimonial-name">Rajesh Kumar</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-image"></div>
+                        <p class="testimonial-quote">"Best investment in my creative journey. The quality of content is outstanding!"</p>
+                        <p class="testimonial-name">Ananya Iyer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-dark">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I enroll in a course?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Simply browse our course catalog, select your desired course, and click the "Enroll Now" button. You'll be guided through a simple registration process.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Are the courses suitable for beginners?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We offer courses for all skill levels, from complete beginners to advanced practitioners. Each course clearly indicates its difficulty level.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do I get a certificate after completion?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! Upon successfully completing a course, you'll receive a digital certificate that you can share on social media and add to your portfolio.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I access courses on mobile devices?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Our platform is fully responsive and works seamlessly on all devices including smartphones, tablets, and desktops.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is your refund policy?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer a 30-day money-back guarantee. If you're not satisfied with your course, contact our support team for a full refund.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>About Us</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Our Story</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Courses</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Music</a></li>
+                            <li><a href="#">Cooking</a></li>
+                            <li><a href="#">Dance</a></li>
+                            <li><a href="#">Art</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <!-- <a href="#" class="social-icon">f</a>
+                            <a href="#" class="social-icon">t</a>
+                            <a href="#" class="social-icon">i</a>
+                            <a href="#" class="social-icon">y</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 daylightlearn || ATX Soft. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // Slider functionality
+            let sliderPositions = {
+                'artists': 0
+            };
+
+            function slideCards(type, direction) {
+                const slider = document.getElementById(`${type}-slider`);
+                const cards = slider.children;
+                const cardWidth = cards[0].offsetWidth + 32; // card width + gap
+                const maxPosition = -(cards.length - 3) * cardWidth; // show 3 cards at a time
+                
+                sliderPositions[type] += direction * cardWidth;
+                
+                // Boundary checks
+                if (sliderPositions[type] > 0) {
+                    sliderPositions[type] = 0;
+                } else if (sliderPositions[type] < maxPosition) {
+                    sliderPositions[type] = maxPosition;
+                }
+                
+                slider.style.transform = `translateX(${sliderPositions[type]}px)`;
+            }
+
+            // FAQ Accordion
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+
+            // Smooth scroll for buttons
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            // FAQ Toggle Script (You probably already have this, but make sure it's included)
+    document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', event => {
+            const faqItem = item.closest('.faq-item');
+            faqItem.classList.toggle('active');
+        });
+    });
+
+    // --- New Responsive Navigation Script ---
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+        
+        // Optional: Change the icon from bars to X when open
+        const navToggleIcon = document.getElementById('navToggle').querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            navToggleIcon.classList.remove('fa-bars');
+            navToggleIcon.classList.add('fa-times');
+        } else {
+            navToggleIcon.classList.remove('fa-times');
+            navToggleIcon.classList.add('fa-bars');
+        }
+    }
+
+    // Optional: Slider functionality (if not yet implemented)
+    let artistsSlideIndex = 0;
+    function slideCards(sliderId, direction) {
+        const slider = document.getElementById(`${sliderId}-slider`);
+        const totalCards = slider.children.length;
+        const cardWidth = slider.children[0].offsetWidth + 32; // card width + gap
+
+        artistsSlideIndex += direction;
+
+        if (artistsSlideIndex < 0) {
+            artistsSlideIndex = 0; // Prevent sliding past the first card
+        } else if (artistsSlideIndex > totalCards - 3) { // Assuming 3 cards are visible
+            artistsSlideIndex = totalCards - 3; // Prevent sliding past the last card
         }
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
-            });
-        });
-
-        // Smooth scroll for buttons
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        slider.style.transform = `translateX(-${artistsSlideIndex * cardWidth}px)`;
+    }
+        </script>
+    </body>
+    </html>
